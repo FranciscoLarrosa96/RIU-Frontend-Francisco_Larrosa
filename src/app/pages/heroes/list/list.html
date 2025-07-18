@@ -1,0 +1,122 @@
+<section class="min-h-screen bg-gray-100 p-6 max-w-4xl mx-auto space-y-6 text-text dark:text-white">
+
+    <h2 class="text-2xl font-bold text-main">Listado de Héroes</h2>
+
+    <!-- Filtro -->
+    <div class="w-full">
+        <label for="search" class="block text-sm font-medium text-zinc-700 mb-1">
+            Filtrar por nombre
+        </label>
+        <input id="search" appUppercase type="text"
+            class="w-full rounded-xl border border-border px-4 py-2 bg-white dark:bg-zinc-800 text-text dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-main focus:border-main transition"
+            placeholder="Ej: Spider-Man" [value]="filter()" (input)="filter.set($any($event.target).value)" />
+    </div>
+
+
+    <!-- Botón de añadir -->
+    <button mat-raised-button color="primary" (click)="openDialog()">
+        Añadir héroe
+    </button>
+
+
+    <!-- Lista de héroes -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        @for (hero of paginated(); track hero.id) {
+        <div class="cursor-pointer group relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-6 shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-main"
+            data-aos="fade-up">
+
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none">
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="relative z-10 flex flex-col gap-2">
+                <!-- Nombre + Alias -->
+                <h3 class="text-xl font-bold text-main">
+                    {{ hero.name }}
+                    <span class="text-zinc-500 text-sm block -mt-1 italic">
+                        “{{ hero.alias }}”
+                    </span>
+                </h3>
+
+                <!-- Universo -->
+                <p class="text-xs uppercase tracking-wider text-white bg-main rounded-full w-fit px-2 py-0.5">
+                    {{ hero.universe }}
+                </p>
+
+                <!-- Estado -->
+                <p class="text-sm" [ngClass]="hero.active ? 'text-green-600' : 'text-red-600'">
+                    {{ hero.active ? 'Activo' : 'Inactivo' }}
+                </p>
+
+
+                <!-- Contenedor de botones de acción -->
+                <div class="absolute top-4 right-4 flex gap-2 z-20">
+                    <button class="text-main hover:bg-main hover:text-white transition p-2 rounded-full bg-main/10"
+                        (click)="viewHero(hero.id)" matTooltip="Ver detalle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+
+                    <!-- Editar -->
+                    <button class="text-main hover:bg-main hover:text-white transition p-2 rounded-full bg-main/10"
+                        (click)="openDialog(hero)" matTooltip="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                        </svg>
+                    </button>
+
+                    <!-- Eliminar -->
+                    <button
+                        class="text-red-600 hover:bg-red-600 hover:text-white transition p-2 rounded-full bg-red-100"
+                        (click)="deleteHero(hero.id, hero.name)" matTooltip="Eliminar">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                </div>
+
+
+
+
+                <!-- Superpoderes -->
+                <div class="mt-2">
+                    <p class="text-sm font-medium text-zinc-600 dark:text-zinc-300">Poderes:</p>
+                    <ul class="list-disc list-inside text-sm text-zinc-500 dark:text-zinc-400">
+                        @for (power of hero.superpowers; track power) {
+                        <li>{{ power }}</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+
+
+
+
+
+    <div class="flex justify-between items-center pt-6 text-sm text-text">
+        <button mat-button (click)="prevPage()" [disabled]="currentPage() === 0">
+            ⬅ Anterior
+        </button>
+        <span class="text-main">Página {{ currentPage() + 1 }} de {{ totalPages() }}</span>
+        <button mat-button (click)="nextPage()" [disabled]="currentPage() + 1 === totalPages()">
+            Siguiente ➡
+        </button>
+    </div>
+
+
+</section>

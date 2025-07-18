@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>{{ data ? 'Editar' : 'Crear' }} Héroe</h2>
+<mat-dialog-content [formGroup]="form" class="space-y-4">
+    <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Nombre</mat-label>
+        <input appUppercase matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Alias</mat-label>
+        <input matInput formControlName="alias" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Universo</mat-label>
+        <mat-select formControlName="universe">
+            <mat-option value="marvel">Marvel</mat-option>
+            <mat-option value="dc">DC</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Superpoderes</mat-label>
+
+        <mat-chip-grid #chipGrid aria-label="Lista de superpoderes">
+            <mat-chip *ngFor="let power of powers" (removed)="removePower(power)">
+                {{ power }}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+
+            <input placeholder="Agregar poder" [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
+                (matChipInputTokenEnd)="addPower($event)" />
+        </mat-chip-grid>
+    </mat-form-field>
+
+
+
+    <mat-slide-toggle formControlName="active">Activo</mat-slide-toggle>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+    <button [ngClass]="{ 'opacity-50': form.invalid }" [disabled]="form.invalid" mat-raised-button color="primary" (click)="save()">Guardar</button>
+</mat-dialog-actions>

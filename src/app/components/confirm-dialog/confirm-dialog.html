@@ -1,0 +1,16 @@
+<h2 mat-dialog-title class="text-2xl font-bold text-main">
+  ¿Estás seguro?
+</h2>
+
+<mat-dialog-content class="text-zinc-700 dark:text-zinc-300 py-4">
+  <p>¿Querés eliminar a <strong class="text-main">{{ data.name }}</strong>?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="flex justify-end gap-4">
+  <button mat-stroked-button mat-dialog-close color="primary" class="rounded-full px-4">
+    Cancelar
+  </button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="true" class="rounded-full px-4 hover:text-main transition">
+    Eliminar
+  </button>
+</mat-dialog-actions>

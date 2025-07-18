@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "name": "Peter Parker",
+        "alias": "Spider-Man",
+        "superpowers": [
+            "Agilidad sobrehumana",
+            "Telarañas",
+            "Sentido arácnido"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Bruce Wayne",
+        "alias": "Batman",
+        "superpowers": [
+            "Dinero",
+            "Inteligencia",
+            "Artes marciales"
+        ],
+        "universe": "dc",
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "Clark Kent",
+        "alias": "Superman",
+        "superpowers": [
+            "Vuelo",
+            "Superfuerza",
+            "Visión de rayos X"
+        ],
+        "universe": "dc",
+        "active": true
+    },
+    {
+        "id": 4,
+        "name": "Wade Wilson",
+        "alias": "Deadpool",
+        "superpowers": [
+            "Regeneración",
+            "Maestro en artes marciales",
+            "Uso de armas"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 5,
+        "name": "Tony Stark",
+        "alias": "Iron Man",
+        "superpowers": [
+            "Inteligencia",
+            "Tecnología avanzada",
+            "Armadura"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 6,
+        "name": "Diana Prince",
+        "alias": "Wonder Woman",
+        "superpowers": [
+            "Fuerza sobrehumana",
+            "Vuelo",
+            "Habilidad en combate"
+        ],
+        "universe": "dc",
+        "active": true
+    },
+    {
+        "id": 7,
+        "name": "Natasha Romanoff",
+        "alias": "Black Widow",
+        "superpowers": [
+            "Maestra en espionaje",
+            "Habilidades de combate",
+            "Inteligencia"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 8,
+        "name": "Stephen Strange",
+        "alias": "Doctor Strange",
+        "superpowers": [
+            "Magia",
+            "Manipulación del tiempo",
+            "Teletransportación"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 9,
+        "name": "Hal Jordan",
+        "alias": "Green Lantern",
+        "superpowers": [
+            "Anillo de poder",
+            "Volar",
+            "Crear constructos de energía"
+        ],
+        "universe": "dc",
+        "active": true
+    },
+    {
+        "id": 10,
+        "name": "Barry Allen",
+        "alias": "The Flash",
+        "superpowers": [
+            "Velocidad sobrehumana",
+            "Viaje en el tiempo",
+            "Reflejos mejorados"
+        ],
+        "universe": "dc",
+        "active": true
+    },
+    {
+        "id": 11,
+        "name": "Carol Danvers",
+        "alias": "Captain Marvel",
+        "superpowers": [
+            "Vuelo",
+            "Fuerza sobrehumana",
+            "Proyección de energía"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 12,
+        "name": "T'Challa",
+        "alias": "Black Panther",
+        "superpowers": [
+            "Fuerza mejorada",
+            "Sentidos agudizados",
+            "Habilidades de combate"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 13,
+        "name": "Peter Quill",
+        "alias": "Star-Lord",
+        "superpowers": [
+            "Inteligencia",
+            "Habilidades de combate",
+            "Tecnología avanzada"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 14,
+        "name": "Jessica Jones",
+        "alias": "Jessica Jones",
+        "superpowers": [
+            "Fuerza sobrehumana",
+            "Resistencia",
+            "Habilidades de detective"
+        ],
+        "universe": "marvel",
+        "active": true
+    },
+    {
+        "id": 15,
+        "name": "Matt Murdock",
+        "alias": "Daredevil",
+        "superpowers": [
+            "Sentidos agudizados",
+            "Habilidades de combate",
+            "Inteligencia"
+        ],
+        "universe": "marvel",
+        "active": true
+    }
+]
