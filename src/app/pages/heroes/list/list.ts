@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { MaterialDesignModule } from '../../../shared/material/material-design.module';
 import { FormsModule } from '@angular/forms';
-import { HeroService } from '../../../core/heroes.service';
+import { HeroService } from '../../../core/hero.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Hero } from '../../../interfaces/hero.interface';
 import { UppercaseDirective } from '../../../shared/directives/uppercase.directive';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { HeroDialogComponent } from '../../../components/heroe-dialog/heroe-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../components/confirm-dialog/confirm-dialog';
+import { SpinnerService } from '../../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-list',
@@ -17,12 +18,13 @@ import { ConfirmDialogComponent } from '../../../components/confirm-dialog/confi
   styleUrl: './list.scss'
 })
 export class List implements OnInit {
+  spinnerSvc = inject(SpinnerService);
   private _matDialog = inject(MatDialog);
   readonly filter = signal('');
   readonly heroes = signal<Hero[]>([]);
   readonly filtered = computed(() =>
     this.heroesSvc.heroes().filter(h => {
-      if(!this.filter()) return true;
+      if (!this.filter()) return true;
       const term = this.filter()?.toLowerCase() || '';
       return h.name.toLowerCase().includes(term) || h.alias.toLowerCase().includes(term);
     })
@@ -39,13 +41,19 @@ export class List implements OnInit {
   private heroesSvc = inject(HeroService);
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   private _router = inject(Router);
-
   /**
    * Detecta cambios en la lista de héroes
    */
   heroesList = effect(() => {
     this.heroes.set(this.filtered());
   })
+
+  /**
+   * Spinner effect to show/hide loading bar
+   */
+  showLoadingBar = effect(() => {
+    this.spinnerSvc._showLoadingBar();
+  });
 
 
   ngOnInit() {
@@ -104,7 +112,7 @@ export class List implements OnInit {
       data: hero,
       width: '500px',
     }).afterClosed().subscribe((result: any) => {
-      if(result === undefined) return;
+      if (result === undefined) return;
       if (result.id) {
         this.heroesSvc.updateHero(result).subscribe();
       } else {

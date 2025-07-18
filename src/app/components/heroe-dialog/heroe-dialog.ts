@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject, Inject, OnInit } from "@angular/core";
+import { Component, effect, inject, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MaterialDesignModule } from "../../shared/material/material-design.module";
@@ -7,6 +7,7 @@ import { Hero } from "../../interfaces/hero.interface";
 import { UppercaseDirective } from "../../shared/directives/uppercase.directive";
 import { MatChipInputEvent, MatChipsModule } from "@angular/material/chips";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { SpinnerService } from "../../shared/services/spinner.service";
 
 @Component({
   selector: 'app-hero-dialog',
@@ -19,8 +20,15 @@ export class HeroDialogComponent implements OnInit {
   powers: string[] = [];
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hero!: Hero;
+  spinnerSvc = inject(SpinnerService);
   private _formBuilder = inject(FormBuilder);
   private _dialogRef = inject(MatDialogRef<HeroDialogComponent>);
+  /**
+ * Spinner effect to show/hide loading bar
+ */
+  showLoadingBar = effect(() => {
+    this.spinnerSvc._showLoadingBar();
+  });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data?: Partial<Hero>) { }
 
@@ -60,7 +68,6 @@ export class HeroDialogComponent implements OnInit {
       };
       this._dialogRef.close(this.hero);
     }
-    // Si el formulario no es válido, no cerramos el diálogo
   }
 
   closeDialog() {

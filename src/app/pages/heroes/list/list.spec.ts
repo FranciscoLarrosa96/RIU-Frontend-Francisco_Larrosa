@@ -4,7 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import { HeroService } from '../../../core/heroes.service';
+import { HeroService } from '../../../core/hero.service';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 

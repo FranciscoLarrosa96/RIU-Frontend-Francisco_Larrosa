@@ -1,1 +1,23 @@
-<p>detail works!</p>
+<section class="min-h-screen p-6 max-w-2xl mx-auto text-text dark:text-white" data-aos="zoom-in">
+  <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-border p-6 space-y-4">
+    <h2 class="text-3xl font-bold text-main">{{ hero!.name }}</h2>
+    <p class="italic text-zinc-500">Alias: {{ hero!.alias }}</p>
+    <p class="uppercase text-sm font-semibold bg-main text-white px-2 py-1 rounded w-fit">
+      {{ hero!.universe }}
+    </p>
+    <p [ngClass]="hero!.active ? 'text-green-600' : 'text-red-600'">
+      Estado: {{ hero!.active ? 'Activo' : 'Inactivo' }}
+    </p>
+
+    <div>
+      <h3 class="text-lg font-semibold mb-2">Superpoderes</h3>
+      <ul class="list-disc list-inside text-zinc-600 dark:text-zinc-300">
+        <li *ngFor="let power of hero!.superpowers">{{ power }}</li>
+      </ul>
+    </div>
+
+    <div class="pt-4 flex gap-4">
+      <button routerLink="/" class="bg-main text-white px-4 py-2 rounded hover:bg-hover transition">Volver</button>
+    </div>
+  </div>
+</section>
