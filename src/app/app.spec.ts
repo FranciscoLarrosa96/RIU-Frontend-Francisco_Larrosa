@@ -16,10 +16,10 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, RIU-CRUD');
-  });
+  it('should have title property', () => {
+  const fixture = TestBed.createComponent(App);
+  const appInstance = fixture.componentInstance;
+  expect(appInstance.title).toBe('RIU-Frontend-Francisco_Larrosa');
+});
+
 });

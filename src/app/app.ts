@@ -8,7 +8,7 @@ import * as AOS from 'aos';
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  protected title = 'RIU-CRUD';
+  public title = 'RIU-Frontend-Francisco_Larrosa';
 
   ngOnInit(): void {
     AOS.init({
