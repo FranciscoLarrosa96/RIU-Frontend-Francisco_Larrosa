@@ -22,13 +22,15 @@ export class List implements OnInit {
   private _matDialog = inject(MatDialog);
   readonly filter = signal('');
   readonly heroes = signal<Hero[]>([]);
-  readonly filtered = computed(() =>
-    this.heroesSvc.heroes().filter(h => {
+  readonly filtered = computed(() => {
+    const filteredHeroes = this.heroesSvc.heroes().filter(h => {
       if (!this.filter()) return true;
       const term = this.filter()?.toLowerCase() || '';
       return h.name.toLowerCase().includes(term) || h.alias.toLowerCase().includes(term);
-    })
-  );
+    });
+    
+    return filteredHeroes;
+  });
   readonly pageSize = 6;
   readonly currentPage = signal(0);
   readonly paginated = computed(() => {
@@ -47,6 +49,20 @@ export class List implements OnInit {
    */
   showLoadingBar = effect(() => {
     this.spinnerSvc._showLoadingBar();
+  });
+
+  /**
+   * Effect que resetea la página cuando cambia el filtro
+   */
+  filterChangeEffect = effect(() => {
+    // Observar cambios en el filtro
+    const currentFilter = this.filter();
+    const totalPages = this.totalPages();
+    
+    // Si la página actual está fuera de rango, resetear a la primera página
+    if (this.currentPage() >= totalPages && totalPages > 0) {
+      this.currentPage.set(0);
+    }
   });
 
 
