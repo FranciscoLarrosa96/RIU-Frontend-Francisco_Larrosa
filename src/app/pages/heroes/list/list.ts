@@ -41,15 +41,9 @@ export class List implements OnInit {
   private heroesSvc = inject(HeroService);
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   private _router = inject(Router);
-  /**
-   * Detecta cambios en la lista de héroes
-   */
-  heroesList = effect(() => {
-    this.heroes.set(this.filtered());
-  })
 
   /**
-   * Spinner effect to show/hide loading bar
+   * Detecta cuando se muestra el loading bar
    */
   showLoadingBar = effect(() => {
     this.spinnerSvc._showLoadingBar();
@@ -61,7 +55,6 @@ export class List implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
     this._unsubscribeAll.next(null);
     this._unsubscribeAll.complete();
   }
@@ -69,7 +62,7 @@ export class List implements OnInit {
 
 
   /**
-   * Load heroes from the service 
+   * Carga los héroes desde el servicio
    */
   loadHeroes() {
     this.heroesSvc.getHeroes().pipe(takeUntil(this._unsubscribeAll)).subscribe();
@@ -77,7 +70,7 @@ export class List implements OnInit {
 
 
   /**
-   * Navigate to hero details page
+   * Navega a la siguiente página de héroes
    */
   nextPage() {
     if (this.currentPage() < this.totalPages() - 1) {
@@ -86,7 +79,7 @@ export class List implements OnInit {
   }
 
   /**
-   * Navigate to previous hero details page
+   * Navega a la página anterior de héroes
    */
   prevPage() {
     if (this.currentPage() > 0) {
@@ -95,7 +88,7 @@ export class List implements OnInit {
   }
 
   /**
-   * Navigate to hero details page
+   * Navega a la página de detalles del héroe
    * @param id 
    */
   viewHero(id: number) {
@@ -104,7 +97,7 @@ export class List implements OnInit {
 
 
   /**
-   *  Open the hero dialog to create or edit a hero
+   *  Abre el diálogo del héroe para crear o editar un héroe
    * @param hero 
    */
   openDialog(hero?: Hero) {

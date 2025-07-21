@@ -56,6 +56,10 @@ describe('HeroService', () => {
             expect(hero).toEqual(createdHero);
             expect(hero.id).toBe(1);
         });
+
+        // Verificar que se agregó al signal
+        expect(service.heroes().length).toBe(1);
+        expect(service.heroes()[0]).toEqual(createdHero);
     });
 
     it('debería obtener un héroe por ID (getHeroById)', () => {
@@ -216,6 +220,11 @@ describe('HeroService', () => {
 
         service.createHero(newHero).subscribe((hero) => {
             expect(hero.id).toBe(11); // Debería ser max(5,10) + 1 = 11
+            expect(hero.name).toBe('Bruce Wayne');
+            expect(hero.alias).toBe('Batman');
         });
+
+        // Verificar que se agregó correctamente al signal
+        expect(service.heroes().length).toBe(3);
     });
 });

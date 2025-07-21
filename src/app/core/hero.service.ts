@@ -28,12 +28,11 @@ export class HeroService {
     }
 
     createHero(hero: Omit<Hero, 'id'>): Observable<Hero> {
-        // show spinner when creating a hero
         this._spinnerSvc.showLoadingBar();
         const newHero: Hero = { ...hero, id: this.nextId++ };
         this.heroes.set([newHero, ...this.heroes()]);
         return of(newHero).pipe(
-            delay(1700), // Simulate server delay
+            delay(1700),
             finalize(() => {
                 this._spinnerSvc.hideLoadingBar();
             })
@@ -41,13 +40,12 @@ export class HeroService {
     }
 
     updateHero(hero: Hero): Observable<Hero> {
-        // show spinner when creating a hero
         this._spinnerSvc.showLoadingBar();
         const updated = this.heroes().map(h => h.id === hero.id ? hero : h);
         this.heroes.set(updated);
         return of(hero)
             .pipe(
-                delay(1000), // Simulate server delay
+                delay(1000),
                 finalize(() => {
                     this._spinnerSvc.hideLoadingBar();
                 })
