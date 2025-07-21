@@ -45,14 +45,14 @@ export class List implements OnInit {
   private _router = inject(Router);
 
   /**
-   * Detecta cuando se muestra el loading bar
+   * Detecta cuando se muestra la barra de carga
    */
   showLoadingBar = effect(() => {
     this.spinnerSvc._showLoadingBar();
   });
 
   /**
-   * Effect que resetea la página cuando cambia el filtro
+   * Efecto que resetea la página cuando cambia el filtro
    */
   filterChangeEffect = effect(() => {
     // Observar cambios en el filtro
@@ -105,7 +105,7 @@ export class List implements OnInit {
 
   /**
    * Navega a la página de detalles del héroe
-   * @param id 
+   * @param id - ID del héroe a ver
    */
   viewHero(id: number) {
     this._router.navigate(['/heroes/details', id]);
@@ -114,7 +114,7 @@ export class List implements OnInit {
 
   /**
    *  Abre el diálogo del héroe para crear o editar un héroe
-   * @param hero 
+   * @param hero - Héroe a editar (opcional)
    */
   openDialog(hero?: Hero) {
     this._matDialog.open(HeroDialogComponent, {
@@ -133,9 +133,9 @@ export class List implements OnInit {
 
 
   /**
-   * Eliminar un héroe
-   * @param heroId 
-   * @param heroName 
+   * Elimina un héroe
+   * @param heroId - ID del héroe a eliminar
+   * @param heroName - Nombre del héroe para confirmación
    */
   deleteHero(heroId: number, heroName: string) {
     this._matDialog
